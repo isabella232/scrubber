@@ -1,0 +1,12 @@
+{
+  "author": "Christopher Thorn <chris@koding.com> (http://koding.com)",
+  "name": "scrubber",
+  "private": true,
+  "description": "traverse-v-scrub with middleware",
+  "version": "0.1.0",
+  "main": "index.coffee",
+  "dependencies": {
+    "traverse": "^0.6.6"
+  },
+  "devDependencies": {}
+}
