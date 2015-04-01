@@ -1,12 +1,12 @@
 {
-  "author": "Christopher Thorn <chris@koding.com> (http://koding.com)",
   "name": "scrubber",
   "private": true,
-  "description": "traverse-v-scrub with middleware",
-  "version": "0.1.0",
-  "main": "index.coffee",
+  "version": "0.2.0",
+  "main": "build/index.js",
   "dependencies": {
     "traverse": "^0.6.6"
   },
-  "devDependencies": {}
+  "scripts": {
+    "prepublish": "rm -fr build && mkdir -p build && coffee -p -b index.coffee > build/index.js"
+  }
 }

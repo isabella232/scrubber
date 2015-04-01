@@ -4,13 +4,16 @@ Traverse = require 'traverse'
 * @helper daisy
 * @description - serial async helper
 ###
+
 daisy =(args)->
   process.nextTick args.next = ->
     if fn = args.shift() then !!fn args
 
+
 slowDaisy =(args)->
   process.nextTick args.next = ->
     if fn = args.shift() then process.nextTick fn.bind null, args...
+
 
 module.exports = class Scrubber
 
@@ -18,21 +21,25 @@ module.exports = class Scrubber
     unless @stack? then @stack = middleware
     else @stack = @stack.concat middleware
 
+
   ###*
   * @constructor Scrubber
   * @description - initializes the Scrubber instance.
   ###
+
   constructor:(middleware...)->
     if 'function' is typeof middleware[0]
       @stack = middleware
     else
       [@stack] = middleware
 
+
   ###*
   * @method Scrubber#scrub
   * @description - traverses an arbitrary JS object and applies the middleware
   *  stack, serially, to each node encountered during the walk.
   ###
+
   scrub:(obj, callback)->
     scrubber = this
     queue = []
@@ -62,6 +69,7 @@ module.exports = class Scrubber
     else
       daisy queue
 
+
   seemsTooComplex =do->
     maxStackSize = try
       i = 0
@@ -70,6 +78,7 @@ module.exports = class Scrubber
     (length, weight)->
       guess = length * weight
       guess > maxStackSize
+
 
   ###*
   * @method Scrubber#forEach
@@ -85,14 +94,17 @@ module.exports = class Scrubber
   * @description - proxies for the native Array methods; they apply themselves
   *   to the middleware stack
   ###
+
   [
     'forEach','indexOf','join','pop','reverse'
     'shift','sort','splice','unshift','push'
   ]
   .forEach (method)=> @::[method] =(rest...)-> @stack[method].apply @stack, rest
 
+
   ###*
   * @method Scrubber#use
   * @description alias for push.
   ###
+
   @::use = @::push
