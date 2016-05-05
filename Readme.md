@@ -1,11 +1,7 @@
 # scrubber
 
-This package exports `build/index.js`; to transpile coffeescript sources into js, type in:
+Provides an ability to apply a middleware while traversing data on a JS object.
 
-```
-npm run prepublish
-```
+# License
 
-# license
-
-2015 Koding, Inc.
+2016 Koding, Inc. (Apache-2.0)
